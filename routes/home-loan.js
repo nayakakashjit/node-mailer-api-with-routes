@@ -1,6 +1,7 @@
 var express = require('express');
 require('dotenv').config();
-// const res = require('express/lib/response');
+const EventEmitter = require('events');
+const eventEmitter = new EventEmitter()
 var router = express.Router();
 const nodemailer = require("nodemailer");
 const bodyParser = require('body-parser');
@@ -22,43 +23,56 @@ router.get('/', function(req, res) {
 
 
 router.post('/send', cors(corsOptions), (req, res) => {
-	console.log(req.body, 'data of form');
 	let transporter = nodemailer.createTransport({
-		service: process.env.service,
-		host: process.env.host,
-		secure: process.env.secure,
-		port: process.env.port,
+		service: 'gmail',
+		host: 'smtp.gmail.com',
+		secure: true,
+		port: 465,
 		auth: {
-			user: process.env.user, // must be Gmail
-			pass: process.env.pass
-		}
+			user: 'akashjitnayak89@gmail.com', // must be Gmail
+			pass: 'wswmmjoftflscoej'
+		},
 	});
 
 	let maillist = [
-		'nayakakashjit@gmail.com',
-		'saha.santanu0217@gmail.com'
+		'umaloan1@gmail.com' 
 	];
 
 	let mailOptions = {
 		from: 'akashjitnayak89@gmail.com',
 		to: maillist, // must be Gmail
-		cc: `${req.body.name} <${req.body.email}>`,
-		subject: 'Sending Email using Node.js',
+		// cc: `${req.body.name} <${req.body.email}>`,
+		subject: 'New Home Loan Enquiry',
 		html: `
-              <table style="width: 100%; border: none">
-                <thead>
-                  <tr style="background-color: #000; color: #fff;">
-                    <th style="padding: 10px 0">Name</th>
-                    <th style="padding: 10px 0">E-mail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th style="text-align: center">${req.body.name}</th>
-                    <td style="text-align: center">${req.body.email}</td>
-                  </tr>
-                </tbody>
-              </table>
+		<h2>Hi</h2> </br>
+		<table style="width: 100%; border: none">
+		<thead>
+		  <tr style="background-color: #000; color: #fff;">
+			<th style="padding: 10px 0">Full Name</th>
+			<th style="padding: 10px 0">E-mail</th>
+			<th style="padding: 10px 0">Phone</th>
+			<th style="padding: 10px 0">Resident Type</th>
+			<th style="padding: 10px 0">Company</th>
+			<th style="padding: 10px 0">State</th>
+			<th style="padding: 10px 0">City</th>
+			<th style="padding: 10px 0">Selected Bank</th>
+			<th style="padding: 10px 0">WhatsApp</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<th style="text-align: center">${req.body.name}</th>
+			<td style="text-align: center">${req.body.email}</td>
+			<td style="text-align: center">${req.body.phone}</td>
+			<td style="text-align: center">${req.body.resident_type}</td>
+			<td style="text-align: center">${req.body.company_name}</td>
+			<td style="text-align: center">${req.body.property_state}</td>
+			<td style="text-align: center">${req.body.property_city}</td>
+			<td style="text-align: center">${req.body.selected_bank}</td>
+			<td style="text-align: center">${req.body.via_wp}</td>
+		  </tr>
+		</tbody>
+	  </table>
             `
 	};
 
@@ -68,18 +82,37 @@ router.post('/send', cors(corsOptions), (req, res) => {
 		subject: `Thank you ${req.body.name}`,
 	}
 
-	console.log('replyMailToUser', replyMailToUser);
 
-	transporter.sendMail(mailOptions, replyMailToUser, (error, info) => {
+	transporter.sendMail(mailOptions, (error, info) => {
 		if (error) {
 			console.log(error);
+			res.status(400).json({
+				message: 'invalid request'
+			})
 		} else {
 			console.log('Email sent: ' + info.response);
+			eventEmitter.emit('reply');
 			res.status(200).json({
 				message: 'successfuly sent!'
 			})
 		}
 	});
+
+eventEmitter.on('reply', function() {
+	transporter.sendMail(replyMailToUser, (error, info) => {
+		if (error) {
+			console.log(error);
+			res.status(400).json({
+				message: 'invalid request'
+			})
+		} else {
+			console.log('Email sent to user: ' + info.response);
+			res.status(200).json({
+				message: 'successfuly sent!'
+			})
+		}
+	});
+})
 
 });
 
