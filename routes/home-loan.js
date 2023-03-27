@@ -1,5 +1,4 @@
 var express = require('express');
-require('dotenv').config();
 const EventEmitter = require('events');
 const eventEmitter = new EventEmitter()
 var router = express.Router();
@@ -35,7 +34,8 @@ router.post('/send', cors(corsOptions), (req, res) => {
 	});
 
 	let maillist = [
-		'umaloan1@gmail.com' 
+		'umaloan1@gmail.com',
+		'prafulkumar466@gmail.com'
 	];
 
 	let mailOptions = {
@@ -45,6 +45,7 @@ router.post('/send', cors(corsOptions), (req, res) => {
 		subject: 'New Home Loan Enquiry',
 		html: `
 		<h2>Hi</h2> </br>
+		<h3>Please find the below details</h3> </br>
 		<table style="width: 100%; border: none">
 		<thead>
 		  <tr style="background-color: #000; color: #fff;">
@@ -73,6 +74,8 @@ router.post('/send', cors(corsOptions), (req, res) => {
 		  </tr>
 		</tbody>
 	  </table>
+	  </br>
+	  <h3>Thank You</h3>
             `
 	};
 

@@ -22,14 +22,14 @@ router.get('/', function(req, res) {
 
 router.post('/send', cors(corsOptions), (req, res) => {
     let transporter = nodemailer.createTransport({
-        service: process.env.service,
-        host: process.env.host,
-        secure: process.env.secure,
-        port: process.env.port,
-        auth: {
-          user: process.env.user, // must be Gmail
-          pass: process.env.pass
-        }
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      secure: true,
+      port: 465,
+      auth: {
+        user: 'akashjitnayak89@gmail.com', // must be Gmail
+        pass: 'wswmmjoftflscoej'
+      },
       });
   
     let maillist = [
