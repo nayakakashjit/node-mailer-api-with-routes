@@ -1,49 +1,43 @@
-var express = require('express');
-const EventEmitter = require('events');
-const eventEmitter = new EventEmitter()
+var express = require("express");
+const EventEmitter = require("events");
+const eventEmitter = new EventEmitter();
 var router = express.Router();
 const nodemailer = require("nodemailer");
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-router.use(cors())
+router.use(cors());
 let corsOptions = {
-	origin: '*',
-	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
+  origin: "*",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 router.use(bodyParser.json());
 
-
-router.get('/', function(req, res) {
-	res.send('Hello Home Loan Rout');
+router.get("/", function (req, res) {
+  res.send("Hello Home Loan Rout");
 });
 
+router.post("/send", cors(corsOptions), (req, res) => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    secure: true,
+    port: 465,
+    auth: {
+      user: "umaloan1@gmail.com", // must be Gmail
+      pass: "lnrmljoiswlczcmx",
+    },
+  });
 
-router.post('/send', cors(corsOptions), (req, res) => {
-	let transporter = nodemailer.createTransport({
-		service: 'gmail',
-		host: 'smtp.gmail.com',
-		secure: true,
-		port: 465,
-		auth: {
-			user: 'akashjitnayak89@gmail.com', // must be Gmail
-			pass: 'wswmmjoftflscoej'
-		},
-	});
+  let maillist = ["umaloan1@gmail.com", "prafulkumar466@gmail.com"];
 
-	let maillist = [
-		'umaloan1@gmail.com',
-		'prafulkumar466@gmail.com'
-	];
-
-	let mailOptions = {
-		from: 'akashjitnayak89@gmail.com',
-		to: maillist, // must be Gmail
-		// cc: `${req.body.name} <${req.body.email}>`,
-		subject: 'New Home Loan Enquiry',
-		html: `
+  let mailOptions = {
+    from: "umaloan1@gmail.com",
+    to: maillist, // must be Gmail
+    // cc: `${req.body.name} <${req.body.email}>`,
+    subject: "New Home Loan Enquiry",
+    html: `
 		<h2>Hi</h2> </br>
 		<h3>Please find the below details</h3> </br>
 		<table style="width: 100%; border: none">
@@ -76,47 +70,54 @@ router.post('/send', cors(corsOptions), (req, res) => {
 	  </table>
 	  </br>
 	  <h3>Thank You</h3>
-            `
-	};
+            `,
+  };
 
-	let replyMailToUser = {
-		from: 'akashjitnayak89@gmail.com',
-		to: req.body.email,
-		subject: `Thank you ${req.body.name}`,
-	}
+  let replyMailToUser = {
+    from: "umaloan1@gmail.com",
+    to: req.body.email,
+    subject: `Thank you ${req.body.name}`,
+    html: `
+    <h3>Hi ${req.body.name}</h3>,
+    <h3>Thank you, we have received your info</h3> 
+    <h3>A customer service representative will be in touch within 24 hours</h3> 
 
+    </br></br></br>
+    <h3>Thank You</h3></br>
+    <h3>UMALOAN FINANCIAL SERVICES.</h3>
+    `,
+  };
 
-	transporter.sendMail(mailOptions, (error, info) => {
-		if (error) {
-			console.log(error);
-			res.status(400).json({
-				message: 'invalid request'
-			})
-		} else {
-			console.log('Email sent: ' + info.response);
-			eventEmitter.emit('reply');
-			res.status(200).json({
-				message: 'successfuly sent!'
-			})
-		}
-	});
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(400).json({
+        message: "invalid request",
+      });
+    } else {
+      console.log("Email sent: " + info.response);
+      eventEmitter.emit("reply");
+      res.status(200).json({
+        message: "successfuly sent!",
+      });
+    }
+  });
 
-eventEmitter.on('reply', function() {
-	transporter.sendMail(replyMailToUser, (error, info) => {
-		if (error) {
-			console.log(error);
-			res.status(400).json({
-				message: 'invalid request'
-			})
-		} else {
-			console.log('Email sent to user: ' + info.response);
-			res.status(200).json({
-				message: 'successfuly sent!'
-			})
-		}
-	});
-})
-
+  eventEmitter.on("reply", function () {
+    transporter.sendMail(replyMailToUser, (error, info) => {
+      if (error) {
+        console.log(error);
+        res.status(400).json({
+          message: "invalid request",
+        });
+      } else {
+        console.log("Email sent to user: " + info.response);
+        res.status(200).json({
+          message: "successfuly sent!",
+        });
+      }
+    });
+  });
 });
 
 module.exports = router;

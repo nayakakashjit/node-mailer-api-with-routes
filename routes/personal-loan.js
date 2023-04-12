@@ -28,18 +28,17 @@ router.post('/send', cors(corsOptions), (req, res) => {
 		secure: true,
 		port: 465,
 		auth: {
-			user: 'akashjitnayak89@gmail.com', // must be Gmail
-			pass: 'wswmmjoftflscoej'
+			user: 'umaloan1@gmail.com', // must be Gmail
+			pass: 'lnrmljoiswlczcmx'
 		},
 	});
 
 	let maillist = [
-		'umaloan1@gmail.com',
 		'prafulkumar466@gmail.com'
 	];
 
 	let mailOptions = {
-		from: 'akashjitnayak89@gmail.com',
+		from: 'umaloan1@gmail.com',
 		to: maillist, // must be Gmail
 		// cc: `${req.body.name} <${req.body.email}>`,
 		subject: 'New personal Loan Enquiry',
@@ -82,9 +81,18 @@ router.post('/send', cors(corsOptions), (req, res) => {
 	};
 
 	let replyMailToUser = {
-		from: 'akashjitnayak89@gmail.com',
+		from: 'umaloan1@gmail.com',
 		to: req.body.email,
 		subject: `Thank you ${req.body.name}`,
+    html: `
+    <h3>Hi ${req.body.name}</h3>,
+    <h3>Thank you, we have received your info</h3> 
+    <h3>A customer service representative will be in touch within 24 hours</h3> 
+
+    </br></br></br>
+    <h3>Thank You</h3></br>
+    <h3>UMALOAN FINANCIAL SERVICES.</h3>
+    `
 	}
 
 

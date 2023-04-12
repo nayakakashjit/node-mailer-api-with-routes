@@ -28,22 +28,22 @@ router.post('/send', cors(corsOptions), (req, res) => {
 		secure: true,
 		port: 465,
 		auth: {
-			user: 'akashjitnayak89@gmail.com', // must be Gmail
-			pass: 'wswmmjoftflscoej'
+			user: 'umaloan1@gmail.com', // must be Gmail
+			pass: 'lnrmljoiswlczcmx'
 		},
 	});
 
 	let maillist = [
-		'umaloan1@gmail.com'
+    'prafulkumar466@gmail.com'
 	];
 
 	let mailOptions = {
-		from: 'akashjitnayak89@gmail.com',
+		from: 'umaloan1@gmail.com',
 		to: maillist, // must be Gmail
 		// cc: `${req.body.name} <${req.body.email}>`,
 		subject: 'New Business Loan Enquiry',
 		html: `
-		<h2>Hi ${req.body.name}</h2> </br>
+		<h2>Hi</h2> </br>
     <h3>Please find the below details</h3> </br>
 		<table style="width: 100%; border: none">
 		<thead>
@@ -57,8 +57,8 @@ router.post('/send', cors(corsOptions), (req, res) => {
 			<th style="padding: 10px 0">Number Of Years In Operation</th>
 			<th style="padding: 10px 0">Business Turnover</th>
 			<th style="padding: 10px 0">Current Account</th>
-      <th style="padding: 10px 0">GST Active</th>
 			<th style="padding: 10px 0">Selected Bank</th>
+      <th style="padding: 10px 0">GST Active</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -83,15 +83,16 @@ router.post('/send', cors(corsOptions), (req, res) => {
 	};
 
 	let replyMailToUser = {
-		from: 'akashjitnayak89@gmail.com',
+		from: 'umaloan1@gmail.com',
 		to: req.body.email,
 		subject: `Thank you ${req.body.name}`,
     html: `
-    <h3>Thank you, we have received your info</h3> 
-    <h3>A customer service representative will be in touch within 24 hours</h3> 
+    <h4>Hi ${req.body.name}</h4>
+    <h4>Thank you, we have received your info</h4> 
+    <h4>A customer service representative will be in touch within 24 hours</h4> 
 
     </br></br></br>
-    <h3>Thank You</h3></br>
+    <h3>Thank You</h3>
     <h3>UMALOAN FINANCIAL SERVICES.</h3>
     `
 	}
