@@ -28,7 +28,7 @@ router.post('/send', cors(corsOptions), (req, res) => {
     port: 465,
     auth: {
       user: "contact@umaloan.com", // must be Gmail
-      pass: "mnbznqhsoxhxoujg",
+      pass: "",
     },
   });
   
