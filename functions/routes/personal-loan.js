@@ -28,17 +28,15 @@ router.post('/send', cors(corsOptions), (req, res) => {
 		secure: true,
 		port: 465,
 		auth: {
-			user: 'umaloan1@gmail.com', // must be Gmail
-			pass: 'lnrmljoiswlczcmx'
+			user: 'contact@umaloan.com', // must be Gmail
+			pass: 'mnbznqhsoxhxoujg'
 		},
 	});
 
-	let maillist = [
-		'prafulkumar466@gmail.com'
-	];
+	let maillist = ["contact@umaloan.com", "prafulkumar466@gmail.com"];
 
 	let mailOptions = {
-		from: 'umaloan1@gmail.com',
+		from: 'contact@umaloan.com',
 		to: maillist, // must be Gmail
 		// cc: `${req.body.name} <${req.body.email}>`,
 		subject: 'New personal Loan Enquiry',
@@ -77,11 +75,12 @@ router.post('/send', cors(corsOptions), (req, res) => {
 	  </table>
     </br>
     <h3>Thank You</h3> 
+	<img src="https://umaloan.com/assets/images/Logo/logo.jpg" alt="umaloanLogo" width="190" height="45">
     `
 	};
 
 	let replyMailToUser = {
-		from: 'umaloan1@gmail.com',
+		from: 'contact@umaloan.com',
 		to: req.body.email,
 		subject: `Thank you ${req.body.name}`,
     html: `

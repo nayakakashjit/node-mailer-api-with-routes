@@ -18,8 +18,8 @@ app.use('/insta', instaLoanRouts);
 app.use('/creditCard', creditCardRouts);
 
 
-app.listen(3000, () => {
-  console.log("server run!!!");
-});
+// app.listen(3000, () => {
+//   console.log("server run!!!");
+// });
 
-// exports.app = functions.https.onRequest(app)
+exports.app = functions.https.onRequest(app)

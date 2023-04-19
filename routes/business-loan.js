@@ -28,8 +28,8 @@ router.post('/send', cors(corsOptions), (req, res) => {
 		secure: true,
 		port: 465,
 		auth: {
-			user: 'umaloan1@gmail.com', // must be Gmail
-			pass: 'lnrmljoiswlczcmx'
+			user: 'contact@umaloan.com', // must be Gmail
+			pass: 'mnbznqhsoxhxoujg'
 		},
 	});
 
@@ -38,7 +38,7 @@ router.post('/send', cors(corsOptions), (req, res) => {
 	];
 
 	let mailOptions = {
-		from: 'umaloan1@gmail.com',
+		from: 'contact@umaloan.com',
 		to: maillist, // must be Gmail
 		// cc: `${req.body.name} <${req.body.email}>`,
 		subject: 'New Business Loan Enquiry',
@@ -83,7 +83,7 @@ router.post('/send', cors(corsOptions), (req, res) => {
 	};
 
 	let replyMailToUser = {
-		from: 'umaloan1@gmail.com',
+		from: 'contact@umaloan.com',
 		to: req.body.email,
 		subject: `Thank you ${req.body.name}`,
     html: `
