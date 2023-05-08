@@ -20,8 +20,8 @@ app.use('/creditCard', creditCardRouts);
 app.use('/checkEligibility', checkEligibilityRouts);
 
 
-// app.listen(3000, () => {
-//   console.log("server run!!!");
-// });
+app.listen(3000, () => {
+  console.log("server run!!!");
+});
 
-exports.app = functions.https.onRequest(app)
+// exports.app = functions.https.onRequest(app)
