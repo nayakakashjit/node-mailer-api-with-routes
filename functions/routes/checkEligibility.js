@@ -16,7 +16,7 @@ router.use(bodyParser.json());
 
 
 router.get('/', function(req, res) {
-    res.send('Hello Insta Loan Rout');
+    res.send('Hello Eligibility check Rout');
 });
 
 
@@ -37,8 +37,8 @@ router.post('/send', cors(corsOptions), (req, res) => {
     let mailOptions = {
       from: 'contact@umaloan.com',
       to: maillist, // must be Gmail
-      // cc:`${req.body.name} <${req.body.email}>`,
-      subject: "New Instant Loan Enquiry",html: `
+      subject: "New Eligibility check Enquiry",
+      html: `
       <h2>Hi</h2> </br>
       <h3>Please find the below details</h3> </br>
       <table style="width: 100%; border: none">
@@ -46,30 +46,20 @@ router.post('/send', cors(corsOptions), (req, res) => {
         <tr style="background-color: #000; color: #fff;">
         <th style="padding: 10px 0">Full Name</th>
         <th style="padding: 10px 0">E-mail</th>
-        <th style="padding: 10px 0">State</th>
-        <th style="padding: 10px 0">City</th>
         <th style="padding: 10px 0">Phone</th>
-        <th style="padding: 10px 0">Loan Amount</th>
-        <th style="padding: 10px 0">Official Email ID</th>
-        <th style="padding: 10px 0">Pan No</th>
         <th style="padding: 10px 0">Net Salary</th>
-        <th style="padding: 10px 0">Selected Bank</th>
-        <th style="padding: 10px 0">Company</th>
+        <th style="padding: 10px 0">Loan Amount</th>
+        <th style="padding: 10px 0">Pan No</th>
         </tr>
       </thead>
       <tbody>
         <tr>
         <th style="text-align: center">${req.body.name}</th>
         <td style="text-align: center">${req.body.email}</td>
-        <td style="text-align: center">${req.body.property_state}</td>
-        <td style="text-align: center">${req.body.property_city}</td>
         <td style="text-align: center">${req.body.phone}</td>
-        <td style="text-align: center">${req.body.amount}</td>
-        <td style="text-align: center">${req.body.officialemail}</td>
-        <td style="text-align: center">${req.body.pan}</td>
         <td style="text-align: center">${req.body.salary}</td>
-        <td style="text-align: center">${req.body.selected_bank}</td>
-        <td style="text-align: center">${req.body.company_name}</td>
+        <td style="text-align: center">${req.body.amount}</td>
+        <td style="text-align: center">${req.body.pan}</td>
         </tr>
       </tbody>
       </table>
