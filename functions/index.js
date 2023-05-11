@@ -1,6 +1,5 @@
 const functions = require("firebase-functions");
-
-// const nodemailer = require("nodemailer");
+require('./dbConfig/mongoose')
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -25,3 +24,5 @@ app.listen(3000, () => {
 });
 
 // exports.app = functions.https.onRequest(app)
+
+// mongodb+srv://umaloan:umaloan1a2b3c@cluster0.ududwug.mongodb.net/
