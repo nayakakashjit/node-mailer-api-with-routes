@@ -3,15 +3,17 @@ require('./dbConfig/mongoose')
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const homeLoanRout = require('./routes/home-loan');
 const personalLoanRout = require('./routes/personal-loan');
 const businessLaonRout = require('./routes/business-loan');
 const instaLoanRouts = require('./routes/insta-loan');
 const creditCardRouts = require('./routes/credit-card');
 const checkEligibilityRouts = require('./routes/checkEligibility');
-const registerRouts = require('./routes/registerRouter')
-const loginRouts = require('./routes/loginRouter')
+const registerRouts = require('./routes/registerRouter');
+const loginRouts = require('./routes/loginRouter');
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use('/homeloan', homeLoanRout);
 app.use('/personal', personalLoanRout);

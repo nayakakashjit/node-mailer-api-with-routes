@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const userModel = require('../models/register.model');
+const jwt = require('jsonwebtoken');
+const config  = require('../config')
 
 module.exports = async (req, res) => {
     try {
@@ -22,6 +24,17 @@ module.exports = async (req, res) => {
       message:
         'Invalid email or password. Please try again with the correct credentials.',
     });
+    
+    let options = {
+      maxAge: 20 * 60 * 1000, // expire in 20 minutes
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None',
+    };
+
+    const token = jwt.sign({id: user._id}, config.SECRET_ACCESS_TOKEN);
+    res.cookie('SessionID', token, options); // set the token to response header, so that the client sends it back on each subsequent reques
+
     // return user info except password
     const { password, ...user_data } = user._doc;
     res.status(200).json({
