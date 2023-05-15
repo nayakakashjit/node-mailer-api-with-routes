@@ -9,6 +9,8 @@ const businessLaonRout = require('./routes/business-loan');
 const instaLoanRouts = require('./routes/insta-loan');
 const creditCardRouts = require('./routes/credit-card');
 const checkEligibilityRouts = require('./routes/checkEligibility');
+const registerRouts = require('./routes/registerRouter')
+const loginRouts = require('./routes/loginRouter')
 
 app.use(bodyParser.json());
 app.use('/homeloan', homeLoanRout);
@@ -17,6 +19,8 @@ app.use('/business', businessLaonRout);
 app.use('/insta', instaLoanRouts);
 app.use('/creditCard', creditCardRouts);
 app.use('/checkEligibility', checkEligibilityRouts);
+app.use('/register', registerRouts);
+app.use('/login', loginRouts);
 
 
 app.listen(3000, () => {
