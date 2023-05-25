@@ -4,18 +4,27 @@ const eventEmitter = new EventEmitter();
 var router = express.Router();
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
+const verify = require('../middleware/verify')
 const cors = require("cors");
 
-router.use(cors());
-let corsOptions = {
-  origin: "*",
+const corsOptions = {
+  credentials: true,
+  origin: ["http://localhost:4200"],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+  // allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
+  credentials: true
+}
 
+router.use(cors(corsOptions));
 router.use(bodyParser.json());
 
-router.get("/", function (req, res) {
-  res.send("Hello Home Loan Rout");
+router.get("/", verify,  function (req, res) {
+  res.status(200).json({
+    status: 'success',
+    message: 'successfully',
+  });
+  res.end()
 });
 
 router.post("/send", cors(corsOptions), (req, res) => {

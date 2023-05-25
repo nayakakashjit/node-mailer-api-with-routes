@@ -13,8 +13,16 @@ const checkEligibilityRouts = require('./routes/checkEligibility');
 const registerRouts = require('./routes/registerRouter');
 const loginRouts = require('./routes/loginRouter');
 
-app.use(cors())
+const corsOptions = {
+  credentials: true,
+  origin: ["http://localhost:4200"],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+}
+
+app.use(cors(corsOptions))
 app.use(bodyParser.json());
+
 app.use('/homeloan', homeLoanRout);
 app.use('/personal', personalLoanRout);
 app.use('/business', businessLaonRout);
@@ -22,7 +30,7 @@ app.use('/insta', instaLoanRouts);
 app.use('/creditCard', creditCardRouts);
 app.use('/checkEligibility', checkEligibilityRouts);
 app.use('/register', registerRouts);
-app.use('/login', loginRouts);
+app.use('/login', cors(corsOptions), loginRouts);
 
 
 app.listen(3000, () => {
