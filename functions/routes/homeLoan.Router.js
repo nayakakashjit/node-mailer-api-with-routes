@@ -1,10 +1,13 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const verify = require('../middleware/verify');
 const homeloanCtrl = require('../controllers/homeloanController')
 
+// Admin routs
+router.get("/users", verify, homeloanCtrl.getAllHomeLoanList);
+router.delete("/users/:id", verify, homeloanCtrl.deleteOne);
 
-router.get("/", verify, homeloanCtrl.getAllHomeLoanList);
+// web/portal routs
 router.post("/send", homeloanCtrl.newHomeloan);
 
 module.exports = router;

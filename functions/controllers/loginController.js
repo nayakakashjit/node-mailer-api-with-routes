@@ -7,8 +7,9 @@ module.exports = async (req, res) => {
     try {
         const user = await userModel.findOne({email: req.body.email}).select('+password');
     if (!user)
-    return res.status(401).json({
+    return res.json({
       status: 'failed',
+      code: 401,
       data: [],
       message: 'Account does not exist',
     });
@@ -18,8 +19,9 @@ module.exports = async (req, res) => {
 
     // if not valid, return unathorized response
     if (!isPasswordValid)
-    return res.status(401).json({
+    return res.json({
       status: 'failed',
+      code: 401,
       data: [],
       message:
         'Invalid email or password. Please try again with the correct credentials.',
