@@ -1,7 +1,7 @@
 const businessLoanModel = require('../models/businessLoan.model');
 const mailCtrl = require('../controllers/mailController');
 
-const getAllBusinessLoanList = async () => {
+const getAllBusinessLoanList = async (req, res, next) => {
     try {
         const data = await businessLoanModel.find({});
         res.status(200).send({
