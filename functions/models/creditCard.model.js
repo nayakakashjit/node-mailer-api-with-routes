@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const creditCardSchema = mongoose.Schema({
+const creditCardSchema = mongoose.Schema(
+    {
     name: {
         type: String
     },
@@ -40,7 +41,9 @@ const creditCardSchema = mongoose.Schema({
     company_name: {
         type: String
     },
-});
+},
+{ timestamps: true },
+);
 
 const creditCardModel = mongoose.model('creditcard', creditCardSchema);
 module.exports = creditCardModel;

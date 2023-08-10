@@ -3,7 +3,7 @@ const mailCtrl = require('../controllers/mailController');
 
 const getAllBusinessLoanList = async (req, res, next) => {
     try {
-        const data = await businessLoanModel.find({});
+        const data = await businessLoanModel.find({}).sort({createdAt: -1});;
         res.status(200).send({
             status: 200,
             message: 'successfully',

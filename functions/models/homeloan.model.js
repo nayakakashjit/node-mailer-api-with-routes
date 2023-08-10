@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const homeloanSchema = mongoose.Schema({
+const homeloanSchema = mongoose.Schema(
+    {
     name: {
         type: String
     },
@@ -28,7 +29,9 @@ const homeloanSchema = mongoose.Schema({
     via_wp: {
         type: String
     },
-});
+},
+{ timestamps: true },
+);
 
 const homeloanModel = mongoose.model('homeloan', homeloanSchema);
 module.exports = homeloanModel;

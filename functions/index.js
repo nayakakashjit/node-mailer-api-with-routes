@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const dashboardRout = require('./routes/dashBoard.Router');
 const homeLoanRout = require('./routes/homeLoan.Router');
 const personalLoanRout = require('./routes/personalLoan.Router');
 const businessLaonRout = require('./routes/businessLoan.Router');
@@ -17,6 +18,7 @@ const logoutRouts = require('./routes/logout.Router')
 const corsOptions = {
   credentials: true,
   origin: ["http://localhost:4200", "http://localhost:4201"],
+  // origin : ["*", "https://admin-umaloan.web.app", "https://umaloan.com"],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
 }
@@ -24,6 +26,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(bodyParser.json());
 
+app.use('/dashboard', cors(corsOptions), dashboardRout);
 app.use('/homeloan', cors(corsOptions), homeLoanRout);
 app.use('/personal', personalLoanRout);
 app.use('/business', businessLaonRout);

@@ -5,7 +5,7 @@ const mailCtrl = require('../controllers/mailController')
 // Get Homeloans
 const getAllHomeLoanList = async (req, res, next) => {
     try {
-        const data = await homeloanModel.find({});
+        const data = await homeloanModel.find({}).sort({createdAt: -1});
         res.status(200).send({
             status: 200,
             message: 'successfully',

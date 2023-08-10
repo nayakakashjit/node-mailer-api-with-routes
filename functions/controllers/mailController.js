@@ -12,8 +12,8 @@ exports.sendEmail = async function(newLoan, res){
         },
     });
 
-    //   let maillist = ["contact@umaloan.com", "prafulkumar466@gmail.com"];
-    let maillist = ["nayakakashjit@gmail.com"];
+      let maillist = ["contact@umaloan.com", "prafulkumar466@gmail.com", "nayakakashjit@gmail.com"];
+    // let maillist = ["nayakakashjit@gmail.com"];
 
     let mailOptions = {
         from: "contact@umaloan.com",
@@ -24,6 +24,7 @@ exports.sendEmail = async function(newLoan, res){
             <h3>You have new ${newLoan.loantype} enquiry, Please check in Admin dashboard</h3> </br>
           </br>
           <h3>Thank You</h3>
+          <img src="https://umaloan.com/assets/images/Logo/logo.jpg" alt="umaloanLogo" width="190" height="45">
                 `,
     };
 

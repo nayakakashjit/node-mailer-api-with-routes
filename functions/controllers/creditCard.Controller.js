@@ -3,7 +3,7 @@ const mailCtrl = require('../controllers/mailController');
 
 const getAllCreditCardList = async (req, res, next) => {
     try {
-        const data = await creditCardModel.find({});
+        const data = await creditCardModel.find({}).sort({createdAt: -1});
         res.status(200).send({
             status: 200,
             message: 'successfully',

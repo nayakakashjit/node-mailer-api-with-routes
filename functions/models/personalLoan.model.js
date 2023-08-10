@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const personalLoanSchema = mongoose.Schema({
+const personalLoanSchema = mongoose.Schema(
+    {
     name: {
         type: String
     },
@@ -34,7 +35,9 @@ const personalLoanSchema = mongoose.Schema({
     selected_bank: {
         type: String
     }
-});
+},
+{ timestamps: true },
+);
 
 const personalLoanModel = mongoose.model('personalloans', personalLoanSchema);
 module.exports = personalLoanModel;

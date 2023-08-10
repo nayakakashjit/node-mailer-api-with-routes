@@ -3,7 +3,7 @@ const mailCtrl = require('../controllers/mailController');
 
 const getAllInstaLoanList = async (req, res, next) => {
     try {
-        const data = await instaLoanModel.find({});
+        const data = await instaLoanModel.find({}).sort({createdAt: -1});
         res.status(200).send({
             status: 200,
             message: 'successfully',
@@ -56,7 +56,7 @@ const saveInstaLoan = async (req, res, next) => {
 const deleteLoanList = async (req, res, next) => {
     const id = req.params.id;
     try {
-        await personalLoanModel.findByIdAndDelete(id);
+        await instaLoanModel.findByIdAndDelete(id);
         res.status(200).send({
             status: 'success',
             message: 'Record has been successfully deleted',

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const businessLoanSchema = mongoose.Schema({
+const businessLoanSchema = mongoose.Schema(
+    {
     name: {
         type: String
     },
@@ -34,7 +35,8 @@ const businessLoanSchema = mongoose.Schema({
     active_gst: {
         type: String
     }
-});
+},
+{ timestamps: true },);
 
 const businessLoanModel = mongoose.model('businessloan', businessLoanSchema);
 module.exports = businessLoanModel;
